@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
+use App\Models\Photo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +21,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::resource('photos', PhotoController::class);
+Route::get('photos/delete/all/images', [PhotoController::class, 'deleteAll'])->name('photos.deleteAll');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

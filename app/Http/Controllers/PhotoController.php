@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -35,7 +38,25 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'images' => 'required',
+          ]);
+          $user = User::where('id_user', Auth::user()->id_user)->first();
+          if ($request->hasfile('images')) {
+              $images = $request->file('images');
+  
+              foreach($images as $image) {
+                  $name = $image->getClientOriginalName();
+                  $path = $image->store('user_images', 'public');
+                  $photo = new Photo;
+                  $photo->user()->associate($user);
+                  $photo->title = $name;
+                  $photo->img = $path;
+                  $photo->save();
+              }
+           }
+  
+          return back()->with('success', 'Images uploaded successfully');
     }
 
     /**
@@ -57,7 +78,6 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
     }
 
     /**
@@ -69,7 +89,14 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        //
+        $old_title = $photo->title;
+        $old_description = $photo->description;
+        $photo->title = $request->get('title');
+        $photo->description = $request->get('description');
+        $photo->save();
+        $msg = 'Photo '.$old_title.' edited successfully to -> '. 
+        $request->get('title'). '<br> The old description '.$old_description.' to -> '. $request->get('description'). '.';
+        return back()->with('success', $msg);
     }
 
     /**
@@ -80,6 +107,19 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        $old_title = $photo->title;
+        Storage::delete('public/' . $photo->img);
+        $msg = 'Photo '.$old_title.' has been deleted successfully.';
+        $photo->delete();
+        return back()->with('success', $msg);
+    }
+    public function deleteAll()
+    {
+        $photos =Photo::where('id_user', Auth::user()->id_user)->get();
+        foreach ($photos as $photo) {
+            Storage::delete('public/' . $photo->img);
+            $photo->delete();
+        }
+        return back()->with('success', 'All images have been deleted');
     }
 }

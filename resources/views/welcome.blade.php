@@ -27,8 +27,8 @@
     </div>
     @else
     <div class="home-profile">
-        <a class="btn btn-outline-dark btn-sm" href="{{ route('home') }}">
-            {{ Auth::user()->name }}
+        <a class="btn btn-outline-light btn-sm" href="{{ route('home') }}">
+            Profile:{{ Auth::user()->name }}
         </a>
         <a class="btn btn-outline-danger btn-sm" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -39,7 +39,7 @@
         </form>
     </div>
     @endguest
-    <div class="welcome-img">
+    <div class="welcome-img mt-2">
         <img class="img-fluid" src="{{ asset('images\welcome.png') }}" alt="">
     </div>
 </div>

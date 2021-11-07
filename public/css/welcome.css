@@ -1,3 +1,11 @@
+body {
+    background-color: rgb(24, 24, 24);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+h1 {
+    color: #fff;
+}
+
 .welcome {
     text-align: center;
     padding: 20px;
@@ -11,10 +19,9 @@
 .header h1 {
     display: flex;
     align-items: center;
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     background: -webkit-linear-gradient(
         180deg,
-        rgb(20, 20, 20) 55%,
+        rgb(150, 150, 150) 55%,
         #f57c00 10%
     );
     -webkit-background-clip: text;
@@ -28,11 +35,9 @@
     margin: 10px 0;
 }
 .sub-header h2 {
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     color: #f57c00;
 }
 .sub-header p {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #3f3f3f;
 }
 .signInSignUp {
@@ -48,12 +53,12 @@
     gap: 10px;
 }
 .signInSignUp .rowSignInSignUp > p {
-    color: #3f3f3f;
+    color: #cccccc;
     text-align: left;
 }
 .signInSignUp .rowSignInSignUp > a {
     border: 1px solid #f57c00;
-    color: #3f3f3f;
+    color: #afafaf;
     border-radius: 5px;
     text-align: center;
     padding-top: 8px;
@@ -82,4 +87,143 @@
 .welcome-img {
     height: auto;
     width: auto;
+}
+.upload-btn {
+    text-align: center;
+}
+.upload-btn a {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+.upload-btn button {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.gallery {
+    background-color: #3f3f3f;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 50px;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+.gallery img {
+    width: 10%;
+    height: 10%;
+    border-radius: 10px;
+    vertical-align: bottom;
+}
+.photos {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #3b3b3b;
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    --height: 200; /* Minimal row height */
+    --ratio: 1; /* Default aspect ratio for photos that are not loaded yet */
+}
+
+.item {
+    flex: calc(var(--height) / var(--ratio));
+    min-width: calc(var(--height) / var(--ratio) * 1px);
+    margin: 2px;
+}
+
+.item img {
+    width: 100%;
+    border-radius: 5px;
+    opacity: 1;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+}
+
+.placeholder {
+    flex-grow: 99999;
+}
+.center {
+    justify-content: center;
+}
+
+.middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: relative;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.item:hover img {
+    opacity: 0.5;
+}
+.item:hover .middle {
+    opacity: 1;
+}
+.text {
+    background-color: #f57c00;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: -30px;
+}
+.text a > i {
+    color: #fff;
+}
+.text a > i:hover {
+    color: #000000;
+}
+.previewImage {
+    opacity: 1 !important;
+    width: 100% !important;
+}
+#loading {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    background-color: rgb(40, 40, 40);
+    z-index: 99;
+}
+#loading-image {
+    z-index: 100;
+    border: 3px solid;
+    border-image: linear-gradient(
+            0deg,
+            rgba(63, 22, 82, 1) 10%,
+            rgba(157, 52, 136, 1) 40%,
+            rgba(248, 159, 91, 1) 80%
+        )
+        10;
+    width: 29px;
+    height: 29px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
