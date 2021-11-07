@@ -1,0 +1,85 @@
+.welcome {
+    text-align: center;
+    padding: 20px;
+}
+.header {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+}
+.header h1 {
+    display: flex;
+    align-items: center;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    background: -webkit-linear-gradient(
+        180deg,
+        rgb(20, 20, 20) 55%,
+        #f57c00 10%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.header img {
+    width: 100px;
+    height: 100px;
+}
+.sub-header {
+    margin: 10px 0;
+}
+.sub-header h2 {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    color: #f57c00;
+}
+.sub-header p {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #3f3f3f;
+}
+.signInSignUp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+.signInSignUp .rowSignInSignUp {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.signInSignUp .rowSignInSignUp > p {
+    color: #3f3f3f;
+    text-align: left;
+}
+.signInSignUp .rowSignInSignUp > a {
+    border: 1px solid #f57c00;
+    color: #3f3f3f;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 8px;
+    width: 5%;
+}
+.signInSignUp .rowSignInSignUp > a:hover {
+    color: #fff;
+    background-color: #f57c00;
+    border-radius: 5px;
+    width: 5%;
+}
+@media (max-width: 1200px) {
+    .signInSignUp .rowSignInSignUp > a {
+        width: 15%;
+    }
+    .signInSignUp .rowSignInSignUp > a:hover {
+        width: 15%;
+    }
+}
+.home-profile {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.welcome-img {
+    height: auto;
+    width: auto;
+}
