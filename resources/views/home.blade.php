@@ -35,23 +35,23 @@
         </form>
     </div>
     @if (count($photos)>0)
-    <div class="container mt-2 mb-2">
+    <div class="container mt-2 mb-4">
         <div class="d-flex center">
             @if (is_array($photos) || is_object($photos))
             {{$photos->links("pagination::bootstrap-4")}}
             @endif
         </div>
-        <h1>
+        <h6 class="mt-3" style="color: #fff;">
             Your Photos ({{$allPhotos}} Photos)
-            <a class="btn btn-sm btn-secondary float-right mt-3" onclick="$('#deleteAll').submit()">Delete All</a>
-        </h1>
+            <a class="btn btn-sm btn-secondary float-right" onclick="$('#deleteAll').submit()">Delete All</a>
+        </h6>
         <div class="mb-3">
             <form hidden action="{{ route('photos.deleteAll') }}" id="deleteAll">
                 @csrf
             </form>
         </div>
     </div>
-    <div class="container">
+    <div class="container mt-2">
         <div class="container photos">
             <div class="grid">
                 @foreach ($photos as $photo)
