@@ -23,4 +23,5 @@ Route::get('/', function () {
 Auth::routes();
 Route::resource('photos', PhotoController::class);
 Route::get('photos/delete/all/images', [PhotoController::class, 'deleteAll'])->name('photos.deleteAll');
+Route::get('photos/download/{photo}', [PhotoController::class, 'download'])->name('photos.download');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

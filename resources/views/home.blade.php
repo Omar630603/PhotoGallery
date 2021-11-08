@@ -62,6 +62,8 @@
                     <div class="middle" data-bs-toggle="tooltip" title="Title: {{$photo->title}}
                     Description: {{$photo->description}}">
                         <div class="text">
+                            <a href="{{ route('photos.download', $photo) }}">
+                                <i class="fas fa-download"></i></a>
                             <a data-toggle="modal" data-target="#editPhoto{{$photo->id_photo}}">
                                 <i class="far fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#deletePhoto{{$photo->id_photo}}">

@@ -122,4 +122,8 @@ class PhotoController extends Controller
         }
         return back()->with('success', 'All images have been deleted');
     }
+    public function download(Photo $photo){
+        return Storage::download('public/' . $photo->img, $photo->title);
+
+    }
 }
