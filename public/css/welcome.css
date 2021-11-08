@@ -107,7 +107,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 10px;
-    margin: 10px 50px;
+    margin: 10px 0;
     padding: 10px 10px;
     border-radius: 10px;
 }
