@@ -20,6 +20,7 @@ class Photo extends Model
         'title',
         'description',
         'img',
+        'extension'
     ];
     public function user()
     {

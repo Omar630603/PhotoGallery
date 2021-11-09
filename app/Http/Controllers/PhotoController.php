@@ -46,16 +46,25 @@ class PhotoController extends Controller
               $images = $request->file('images');
   
               foreach($images as $image) {
-                  $name = $image->getClientOriginalName();
-                  $path = $image->store('user_images', 'public');
-                  $photo = new Photo;
-                  $photo->user()->associate($user);
-                  $photo->title = $name;
-                  $photo->img = $path;
-                  $photo->save();
+                //oci
+                $oci = Storage::disk('oci');
+                // dd($oci);    
+
+                $file_name = uniqid() .'.'. $image->getClientOriginalExtension();
+                $ociFilePath = '/user_images/' . Auth::user()->id_user . '/' . $file_name;
+                $oci->put($ociFilePath, file_get_contents($image));
+                //local
+                // $ociFilePath = $image->store('user_images', 'public'); 
+                $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $image->getClientOriginalExtension();
+                $photo = new Photo;
+                $photo->user()->associate($user);
+                $photo->title = $name;
+                $photo->img = $ociFilePath;
+                $photo->extension = $extension;
+                $photo->save();
               }
            }
-  
           return back()->with('success', 'Images uploaded successfully');
     }
 
@@ -123,7 +132,7 @@ class PhotoController extends Controller
         return back()->with('success', 'All images have been deleted');
     }
     public function download(Photo $photo){
-        return Storage::download('public/' . $photo->img, $photo->title);
+        return Storage::download('public/' . $photo->img, $photo->title.'.'.$photo->extension);
 
     }
 }

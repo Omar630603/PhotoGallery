@@ -56,6 +56,8 @@
             <div class="grid">
                 @foreach ($photos as $photo)
                 <div class="item">
+                    {{-- <img src="{{Storage::disk('oci')->url('grk5mithwnvq.jpg')}}"> --}}
+
                     <img data-bs-toggle="tooltip" title="Title: {{$photo->title}}
                 Description: {{$photo->description}}" id="{{$photo->id_photo}}" src="storage/{{$photo->img}}"
                         alt="{{$photo->title}}" />

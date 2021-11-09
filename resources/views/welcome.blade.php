@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="welcome">
+    {{-- <img src="{{Storage::disk('oci')->url('grk5mithwnvq.jpg')}}"> --}}
+
     <div class="header">
         <h1 class="align-text-bottom">Welcom to PhotoGallery</h1>
         <img class="img-fluid" src="{{ asset('images\icon.png') }}" alt="">
