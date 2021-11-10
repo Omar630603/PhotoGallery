@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Oracle;
 use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PhotoController extends Controller
 {
+    public function oracle()
+    {
+        $data = new Oracle;
+        return $data;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,20 +55,22 @@ class PhotoController extends Controller
   
               foreach($images as $image) {
                 //oci
-                $oci = Storage::disk('oci');
-                // dd($oci);    
-
-                $file_name = uniqid() .'.'. $image->getClientOriginalExtension();
-                $ociFilePath = '/user_images/' . Auth::user()->id_user . '/' . $file_name;
-                $oci->put($ociFilePath, file_get_contents($image));
-                //local
+                $imagefirstname = uniqid() .'-'.Auth::user()->name;
+                $extension = $image->getClientOriginalExtension();
+                
+                $file_name = "{$imagefirstname}.{$extension}";
+                $ociFilePath = 'user_images/' . $user->id_user.'/photos' ;
+                $upload = $image->move($ociFilePath,$file_name);
+                $this->oracle()->upFileOracle($upload);
+                File::delete($upload);
+                // local
                 // $ociFilePath = $image->store('user_images', 'public'); 
                 $name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
                 $photo = new Photo;
                 $photo->user()->associate($user);
                 $photo->title = $name;
-                $photo->img = $ociFilePath;
+                $photo->img = $upload;
+                $photo->file_name = $file_name;
                 $photo->extension = $extension;
                 $photo->save();
               }
@@ -116,8 +126,9 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
+        $path = 'images/user_images/'.Auth::user()->id_user.'/photos\\'.$photo->file_name;
         $old_title = $photo->title;
-        Storage::delete('public/' . $photo->img);
+        Storage::delete($path);
         $msg = 'Photo '.$old_title.' has been deleted successfully.';
         $photo->delete();
         return back()->with('success', $msg);
@@ -126,13 +137,16 @@ class PhotoController extends Controller
     {
         $photos =Photo::where('id_user', Auth::user()->id_user)->get();
         foreach ($photos as $photo) {
-            Storage::delete('public/' . $photo->img);
+            Storage::disk('s3')->delete('images/' . $photo->img);
             $photo->delete();
         }
         return back()->with('success', 'All images have been deleted');
     }
     public function download(Photo $photo){
-        return Storage::download('public/' . $photo->img, $photo->title.'.'.$photo->extension);
-
+        $path = Storage::url('images/'.$photo->img);
+        $filename = $photo->title.'.'.$photo->extension;
+        $tempImage = tempnam(sys_get_temp_dir(), $filename);
+        copy($path, $tempImage);
+        return response()->download($tempImage, $filename);
     }
 }

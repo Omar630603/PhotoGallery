@@ -20,6 +20,7 @@ class CreatePhotosTable extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->string('img');
+            $table->string('file_name');
             $table->string('extension');
             $table->timestamps();
         });

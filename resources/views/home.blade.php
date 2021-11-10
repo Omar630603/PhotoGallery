@@ -56,11 +56,9 @@
             <div class="grid">
                 @foreach ($photos as $photo)
                 <div class="item">
-                    {{-- <img src="{{Storage::disk('oci')->url('grk5mithwnvq.jpg')}}"> --}}
-
                     <img data-bs-toggle="tooltip" title="Title: {{$photo->title}}
-                Description: {{$photo->description}}" id="{{$photo->id_photo}}" src="storage/{{$photo->img}}"
-                        alt="{{$photo->title}}" />
+                Description: {{$photo->description}}" id="{{$photo->id_photo}}"
+                        src="{{Storage::disk('s3')->url('images/'.$photo->img)}}" alt="{{$photo->title}}" />
                     <div class="middle" data-bs-toggle="tooltip" title="Title: {{$photo->title}}
                     Description: {{$photo->description}}">
                         <div class="text">
@@ -80,7 +78,7 @@
                                     <h5 class="modal-title" id="deletePhoto{{$photo->id_photo}}Label">
                                         Delete {{$photo->title}}
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    <button type="button" class="btn-close" data-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -102,7 +100,8 @@
                                             <div class="form-group col-md-12">
                                                 <label for="Preview">Preview</label>
                                                 <img class="previewImage" id="delete{{$photo->id_photo}}"
-                                                    src="storage/{{$photo->img}}" alt="{{$photo->title}}" />
+                                                    src="{{Storage::disk('s3')->url('images/'.$photo->img)}}"
+                                                    alt="{{$photo->title}}" />
                                             </div>
                                         </div>
                                     </form>
@@ -124,7 +123,7 @@
                                     <h5 class="modal-title" id="editPhoto{{$photo->id_photo}}Label">
                                         Edit {{$photo->title}}
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    <button type="button" class="btn-close" data-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -149,7 +148,8 @@
                                             <div class="form-group col-md-12">
                                                 <label for="Preview">Preview</label>
                                                 <img class="previewImage" id="edit{{$photo->id_photo}}"
-                                                    src="storage/{{$photo->img}}" alt="{{$photo->title}}" />
+                                                    src="{{Storage::disk('s3')->url('images/'.$photo->img)}}"
+                                                    alt="{{$photo->title}}" />
                                             </div>
                                         </div>
                                     </form>
