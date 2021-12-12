@@ -36,7 +36,7 @@ jobs:
 
       - name: "Build and push"
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/photo-gallery
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/photo-gallery .
           docker push ${{ secrets.DOCKERHUB_USERNAME}}/photo-gallery
       - name: "Write config"
         run: |
