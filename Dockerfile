@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-WORKDIR /var/www/laravel
+WORKDIR /var/www/photogallery
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -28,11 +28,11 @@ RUN composer install --no-autoloader --no-scripts --no-dev
 
 COPY docker/ /
 RUN a2enmod rewrite headers \
-    && a2ensite laravel \
+    && a2ensite photogallery \
     && a2dissite 000-default \
-    && chmod +x /usr/local/bin/docker-laravel-entrypoint
+    && chmod +x /usr/local/bin/docker-photogallery-entrypoint
 
-COPY . /var/www/laravel
+COPY . /var/www/photogallery
 RUN composer install --optimize-autoloader --no-dev
 
-CMD ["docker-laravel-entrypoint"]
+CMD ["docker-photogallery-entrypoint"]
