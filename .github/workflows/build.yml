@@ -118,6 +118,7 @@ jobs:
           host: ${{env.INSTANCE_IP}}
           username: opc
           key: ${{secrets.OCI_KEY_FILE}}
+          command_timeout: 200m
           script: |
             sudo yum install -y yum-utils
             sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
