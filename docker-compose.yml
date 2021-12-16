@@ -8,9 +8,9 @@
 #             - 80:80
 version: "3"
 services:
-    app:
+    web:
         image: omar60603/photo-gallery:latest
-        container_name: app
+        container_name: web
         restart: unless-stopped
         working_dir: /var/www/photogallery
         extra_hosts:
@@ -41,9 +41,3 @@ services:
         volumes:
             - $STORAGE_PATH:/var/www/photogallery/storage
             - ./vendor:/var/www/photogallery/vendor
-        networks:
-            - app
-
-networks:
-    app:
-        driver: bridge
