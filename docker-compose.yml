@@ -10,7 +10,7 @@ version: "3"
 services:
     app:
         image: omar60603/photo-gallery:latest
-        container_name: web
+        container_name: app
         restart: unless-stopped
         working_dir: /var/www/photogallery
         extra_hosts:
@@ -42,8 +42,8 @@ services:
             - $STORAGE_PATH:/var/www/photogallery/storage
             - ./vendor:/var/www/photogallery/vendor
         networks:
-            - web
+            - app
 
 networks:
-    web:
+    app:
         driver: bridge
