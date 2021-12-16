@@ -119,13 +119,8 @@ else
     php artisan route:cache
 fi
 
-chown www-data:www-data bootstrap/cache
-chown -R www-data:www-data storage/
-chmod 755 public/system
-chown www-data:www-data public/system
-chown -R www-data.www-data 
-chmod -R 755 
-chmod -R 777 /storage
+sudo chown www-data:www-data bootstrap/cache
+sudo chown -R www-data:www-data storage/
 
 
 if [[ "$DB_CONNECTION" = "sqlite" ]]; then
