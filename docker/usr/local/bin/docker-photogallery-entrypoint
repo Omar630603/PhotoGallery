@@ -121,6 +121,9 @@ fi
 
 chown www-data:www-data bootstrap/cache
 chown -R www-data:www-data storage/
+chown -R www-data.www-data /var/www/photogallery
+chmod -R 755 /var/www/photogallery
+chmod -R 777 /var/www/photogallery/storage
 
 
 if [[ "$DB_CONNECTION" = "sqlite" ]]; then
