@@ -1,43 +1,8 @@
-# version: "3"
-# services:
-#     web:
-#         image: omar60603/photo-gallery:latest
-#         container_name: web
-#         restart: unless-stopped
-#         ports:
-#             - 80:80
 version: "3"
 services:
     web:
         image: omar60603/photo-gallery:latest
         container_name: web
         restart: unless-stopped
-        working_dir: /var/www/photogallery
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        environment:
-            - APP_NAME
-            - APP_ENV
-            - APP_DEBUG
-            - APP_URL
-            - DB_CONNECTION
-            - DB_HOST
-            - DB_PORT
-            - DB_DATABASE
-            - DB_USERNAME
-            - DB_PASSWORD
-            - ORACLE_ACCESS_KEY
-            - ORACLE_SECRET_KEY
-            - ORACLE_REGION
-            - ORACLE_NAMESPACE
-            - AWS_ACCESS_KEY_ID
-            - AWS_SECRET_ACCESS_KEY
-            - AWS_DEFAULT_REGION
-            - AWS_BUCKET
-            - AWS_USE_PATH_STYLE_ENDPOINT
-            - AWS_ENDPOINT
         ports:
             - 80:80
-        volumes:
-            - $STORAGE_PATH:/var/www/photogallery/storage
-            - ./vendor:/var/www/photogallery/vendor
