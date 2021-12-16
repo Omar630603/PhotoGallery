@@ -15,7 +15,7 @@ if [[ -z "$DB_CONNECTION" ]]; then
 fi
 
 if [[ -z "$APP_NAME" ]]; then
-    export APP_NAME=${APP_NAME}
+    export APP_NAME=env('APP_NAME');
     echo -e "\e[33mENV undefined: APP_NAME,\e[0m use default $APP_NAME"
 fi
 
@@ -121,6 +121,12 @@ fi
 
 chown www-data:www-data bootstrap/cache
 chown -R www-data:www-data storage/
+chmod 755 public/system
+chown www-data:www-data public/system
+chown -R www-data.www-data 
+chmod -R 755 
+chmod -R 777 /storage
+
 
 if [[ "$DB_CONNECTION" = "sqlite" ]]; then
     touch database/database.sqlite
